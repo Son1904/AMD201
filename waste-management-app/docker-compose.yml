@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  user-service:
+    build: ./microservices/user-service
+    environment:
+      - MONGO_URL=mongodb+srv://userid:userid@fgwweb2.oywbm.mongodb.net/users?retryWrites=true&w=majority
+      - DATABASE_NAME=users
+    ports:
+      - "8001:8001"
+    networks:
+      - app_network
+
+  waste-category-service:
+    build: ./microservices/waste-category-service
+    environment:
+      - MONGO_URL=mongodb+srv://userid:userid@fgwweb2.oywbm.mongodb.net/waste_categories?retryWrites=true&w=majority
+      - DATABASE_NAME=waste_categories
+    ports:
+      - "8002:8002"
+    networks:
+      - app_network
+
+  waste-item-service:
+    build: ./microservices/waste-item-service
+    environment:
+      - MONGO_URL=mongodb+srv://userid:userid@fgwweb2.oywbm.mongodb.net/waste_items?retryWrites=true&w=majority
+      - DATABASE_NAME=waste_items
+    ports:
+      - "8003:8003"
+    networks:
+      - app_network
+
+  challenge-service:
+    build: ./microservices/challenge-service
+    environment:
+      - MONGO_URL=mongodb+srv://userid:userid@fgwweb2.oywbm.mongodb.net/challenges?retryWrites=true&w=majority
+      - DATABASE_NAME=challenges
+    ports:
+      - "8004:8004"
+    networks:
+      - app_network
+
+networks:
+  app_network:
